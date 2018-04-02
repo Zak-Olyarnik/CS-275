@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/ZWO/Documents/CS - 275/L2/src/jars/charsets.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ZWO/Documents/CS - 275/L2/src/jars/dnsns.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ZWO/Documents/CS - 275/L2/src/jars/jce.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ZWO/Documents/CS - 275/L2/src/jars/jsse.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ZWO/Documents/CS - 275/L2/src/jars/localedata.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ZWO/Documents/CS - 275/L2/src/jars/resources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ZWO/Documents/CS - 275/L2/src/jars/rt.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ZWO/Documents/CS - 275/L2/src/jars/sunjce_provider.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ZWO/Documents/CS - 275/L2/src/jars/temboo-java-sdk-1.76.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ZWO/Documents/CS - 275/L2/src/jars/gson-2.2.4.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="build" name="A1">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <path id="A1.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="src/jars/temboo-java-sdk-1.76.jar"/>
+        <pathelement location="src/jars/charsets.jar"/>
+        <pathelement location="src/jars/dnsns.jar"/>
+        <pathelement location="src/jars/jce.jar"/>
+        <pathelement location="src/jars/jsse.jar"/>
+        <pathelement location="src/jars/localedata.jar"/>
+        <pathelement location="src/jars/resources.jar"/>
+        <pathelement location="src/jars/rt.jar"/>
+        <pathelement location="src/jars/sunjce_provider.jar"/>
+    </path>
+    <path id="run.A1.classpath">
+        <path refid="A1.classpath"/>
+    </path>
+    <path id="run.A1.bootclasspath"/>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="A1.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target name="A1">
+        <java classname="A1" failonerror="true" fork="yes">
+            <classpath refid="run.A1.classpath"/>
+            <bootclasspath>
+                <path refid="run.A1.bootclasspath"/>
+            </bootclasspath>
+        </java>
+    </target>
+</project>

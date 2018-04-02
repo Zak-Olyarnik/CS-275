@@ -1,0 +1,34 @@
+CS-275
+P2
+
+Zak Olyarnik 	zwo24@drexel.edu
+Harshil Patel	hrp27@drexel.edu
+Dana Thompson   dft29@drexel.edu
+Sam Caulker	src92@drexel.edu
+
+
+Accomplished Tasks:
+-Simple camera interface: The app launches and allows full access to the Android camera.  After taking a picture,
+there is the option to save it to the phone or discard it (see included images)
+-Console uploads: From eclipse, we can upload images, pdfs, and additional file types to Dropbox and GoogleDrive.
+All account information is hardcoded
+-Everything continues to be collaborative, but so far Harshil has taken the lead on the camera stuff while Zak got
+everything working on the console
+
+Remaining Tasks:
+-Scanner functionality: Allow saving as .pdf type in addition to .jpg.  We have applied for API permissions to do
+this, and it should be easy to implement. 
+-Upload code into Android project: The working upload code must be placed into the camera Android project.  The
+complication here is that webviews are almost certainly needed to authenticate the OAuth permissions, and it's
+probably not a bad idea to send the user to their upload site after to show them it worked.  Dana and Sam are planning
+to work on the conversion from console to webview.
+
+Further Goals (time permitting):
+-Move all hardcoded data into a Preferences file: Simply putting it there will be no problem, but fully implementing
+a check to see if it exists there, then launching a new webview to re-enter if not, will be more work.  Since that
+would only ever occur on the very first usage of the app, a full implementation will not be necessary for the demonstration
+-Additional supported upload sites: While the base code should be similar to what is already written, the imports are more
+complicated because many share similar names (like InitializeOAuth), and the interface would need to change each time to 
+accommodate more options.
+-A queue for back uploads: this is a pipe dream to include a back-end service, but at this point it is neither feasible nor
+really in the spirit of the "instant uploads" goal of the QuickPic app

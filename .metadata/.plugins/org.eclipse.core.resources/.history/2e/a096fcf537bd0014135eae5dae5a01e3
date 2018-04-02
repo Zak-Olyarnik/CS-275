@@ -1,0 +1,203 @@
+package com.example.a2;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import android.support.v4.app.FragmentActivity;
+import android.content.Context;
+import android.database.Cursor;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends FragmentActivity {
+
+	String[] items;
+	String[] creatures;
+	ArrayList<String> ar;
+	ArrayList<String> trains;
+	ArrayList<String> times;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+		// this will be the array of trains w/ data train, departure, arrival (all in json from second link based on from-to selections) 
+		ar = new ArrayList<String>();
+		ar.add("Test1");
+		ar.add("Test2");
+		ar.add("Test3");
+		ar.add("Test4");
+		ar.add("Test5");
+		ar.add("Test6");
+		ar.add("Test7");
+		ar.add("Test8");
+		items = new String[] { "Vegetables","Fruits","Flower Buds","Legumes","Bulbs","Tubers", "Other Things", "Like Rabbits" };
+		creatures = new String[] {"Maxxor","Chaor","LVB","HMA","Kolmo","Mudeenu","Tangath","Blazvatan"};
+		
+		Button buttonSearch = (Button) findViewById(R.id.button1);
+		buttonSearch.setOnClickListener(new OnClickListener(){
+			public void onClick(View v){
+				GetTrainsAsyncTask myTask = new GetTrainsAsyncTask();	// new async task to get weather data
+				myTask.execute();
+			}
+		});
+	}
+	
+	// async task to retrieve weather data
+	private class GetTrainsAsyncTask extends AsyncTask<Void, Void, Void> {
+			
+		@Override
+		protected Void doInBackground(Void... arg0) {
+			//String key = "49600e365dd5f59d";						// acquired from http://www.wunderground.com/weather/api/
+
+			TextView txt3 = (TextView) findViewById(R.id.textView3);
+			
+			Spinner sourceSpinner = (Spinner) findViewById(R.id.spinner1);
+			Spinner destSpinner = (Spinner) findViewById(R.id.spinner2);
+			String sourceStation = sourceSpinner.getSelectedItem().toString();
+			//sourceStation = sourceStation.replace(" ", "%20");
+			String destStation = destSpinner.getSelectedItem().toString();
+			//destStation = destStation.replace(" ", "%20");
+			//try {
+				//sourceStation = URLEncoder.encode(sourceStation, "UTF-8");
+				//destStation = URLEncoder.encode(destStation, "UTF-8");
+			//} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+			//}
+			
+			
+			
+			txt3.setText(sourceStation);
+			// connects to URL and retrieves Json weather information
+			//String sURL = "http://www3.septa.org/hackathon/NextToArrive/" + sourceStation + "/" + destStation + "/20";
+			
+		/*	try {		
+				//URL url = new URL(sURL);
+				//HttpURLConnection request = (HttpURLConnection) url.openConnection();
+				//request.connect();
+			
+				/*JsonParser jp = new JsonParser();
+				JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
+				System.out.println(root.toString());
+				JsonArray rootobj = root.getAsJsonArray();
+	    	
+				// parses the Json response. "i" is the section of the array for each tweet
+		        for(int i = 0; i < rootobj.size(); i++) {
+		        	JsonObject item = rootobj.get(i).getAsJsonObject();
+		        	String trainNum = item.get("orig_train").getAsString();
+		        	System.out.println(trainNum);
+		        	String departTime = item.get("orig_departure_time").getAsString();
+		        	String arrivalTime = item.get("orig_arrival_time").getAsString();
+		        	trains.add(trainNum);
+		        	times.add("Departure: " + departTime + "   Arrival: " + arrivalTime);
+		        }
+				
+	    	} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void arg0) {
+			//populate();
+		}
+	}	// async task
+	
+	private void populate() { 
+		ListView listView = (ListView) findViewById(R.id.listView1); 
+		
+		//http://stackoverflow.com/questions/7916834/android-adding-listview-sub-item-text
+		List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+		/*for (int i=0; i < trains.size(); i++) {
+		    Map<String, String> datum = new HashMap<String, String>(2);
+		    datum.put("train", trains.get(i));
+		    datum.put("time", times.get(i));
+		    data.add(datum);
+		}
+		
+		SimpleAdapter ListAdapter = new SimpleAdapter(this, data,
+                android.R.layout.simple_list_item_2,
+                new String[] {"train", "time"},
+                new int[] {android.R.id.text1,
+                           android.R.id.text2});*/
+		
+		for (int i=0; i < ar.size(); i++) {
+		    Map<String, String> datum = new HashMap<String, String>(2);
+		    datum.put("train", ar.get(i));
+		    datum.put("time", creatures[i]);
+		    data.add(datum);
+		}
+		
+		SimpleAdapter ListAdapter = new SimpleAdapter(this, data,
+                android.R.layout.simple_list_item_2,
+                new String[] {"train", "time"},
+                new int[] {android.R.id.text1,
+                           android.R.id.text2});
+		
+		listView.setAdapter(ListAdapter);
+		
+		
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position,
+               long id) {
+                
+            	// this will be last departed station, scheduled time and actual time (obtained from calling the first link with train number clicked)
+            	String item = ((TextView)view.findViewById(android.R.id.text1)).getText().toString();
+                Toast.makeText(getBaseContext(), item.toString(), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+}

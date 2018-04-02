@@ -1,0 +1,10 @@
+for each train t
+	map.addMarker(new MarkerOptions)
+		position(new LatLong(t.Lat, t.Lon))
+		title(t.toString())
+		snippet("next stop")
+
+
+
+javascript:
+gmap.html?lat=xxx&long=yyy

@@ -1,0 +1,6 @@
+Oauth (Temboo)
+-loop over __list
+-GetFile, process,
+--Base64 to binary conversion in Java
+ move, update __list
+-UploadFile

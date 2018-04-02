@@ -1,0 +1,1 @@
+cd ~wmm24/public_html/cs275/resources/piazza
